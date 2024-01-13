@@ -7,14 +7,13 @@ import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import axios from 'axios';
 import SearchBar from '../SearchBar/SearchBar';
 
-
 import Modal from 'react-modal';
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
 const TableForm = () => {
   const handleSearch = (searchTerm) => {
-      // Handle the search logic here
-      console.log('Searching for:', searchTerm);
+    // Handle the search logic here
+    console.log('Searching for:', searchTerm);
   };
 
   const modalStyle = {
@@ -23,40 +22,33 @@ const TableForm = () => {
       top: '50%', // Center vertically
       left: '50%', // Center horizontally
       transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
-     
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-      backdropFilter: 'blur(1px)', 
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(1px)',
     },
   };
 
-  
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const openEditModal = () => {
     setIsEditModalOpen(true);
-   
   };
-  
+
   const closeEditModal = () => {
     setIsEditModalOpen(false);
   };
-  
 
   const [adoptions, setAdoptions] = useState([]);
-    useEffect(() => {
-      axios.get('http://localhost:3001/adoption')
-        .then(response => {
-          setAdoptions(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }, []);
-
-
-
-
+  useEffect(() => {
+    axios
+      .get('https://yourwoof-server.onrender.com/adoption')
+      .then((response) => {
+        setAdoptions(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,30 +57,21 @@ const TableForm = () => {
   const currentItems = adoptions.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(adoptions.length / itemsPerPage);
   const handlePageChange = (newPage) => {
-      setCurrentPage(newPage);
+    setCurrentPage(newPage);
   };
 
-return (
+  return (
     <div className='w-full h-full flex flex-col justify-between items-center overflow-x-auto'>
-
-      
-        
-       
-
-        <div className="sidebar m-4 w-full flex flex-col md:flex-row lg:flex-row justify-start lg:justify-between items-start overflow-x-auto">
-        <SearchBar onSearch={handleSearch} className="w-full"/>
+      <div className='sidebar m-4 w-full flex flex-col md:flex-row lg:flex-row justify-start lg:justify-between items-start overflow-x-auto'>
+        <SearchBar onSearch={handleSearch} className='w-full' />
         <div>
           <div className='p-2 font-raleway px-4 bg-blue-dark text-white rounded-md mt-2 md:mt-0 lg:mt-0'>
             Total adoptions {adoptions.length}
           </div>
         </div>
-      
-
-        
-
       </div>
-       
-      <div className="table-wrapper p-4 w-full border border-blue-dark rounded-lg overflow-x-auto">
+
+      <div className='table-wrapper p-4 w-full border border-blue-dark rounded-lg overflow-x-auto'>
         <table className='font-raleway w-full p-2 rounded-lg'>
           <thead className='text-start font-bold'>
             <tr>
@@ -108,112 +91,85 @@ return (
               <tr key={user.id} className='border-t hover:bg-blue-dark hover:text-white rounded-lg'>
                 <td className='p-2'>{user.id}</td>
                 <td className='p-2'>
-                  <div className="pf flex flex-row items-center">
-                    <img
-                      src={user.userImage}
-                      alt="Profile"
-                      className="w-6 h-6 rounded-full mr-2"
-                    />
+                  <div className='pf flex flex-row items-center'>
+                    <img src={user.userImage} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
                     <p>{user.userUsername}</p>
                   </div>
                 </td>
                 <td className='p-2'>
-                  <div className="pf flex flex-row items-center">
-                    <img
-                      src={user.petImage}
-                      alt="Profile"
-                      className="w-6 h-6 rounded-full mr-2"
-                    />
+                  <div className='pf flex flex-row items-center'>
+                    <img src={user.petImage} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
                     <p>{user.petName}</p>
                   </div>
                 </td>
                 <td className='p-2'>{user.email}</td>
-               
+
                 <td className='p-2'>{user.phoneNumber}</td>
                 <td className='p-2'>{user.address}</td>
-                <td className={` p-2 ${user.status === 'pending' ? 'text-red-500' : 'text-blue'}`}>
-                  {user.status}
-                </td>
+                <td className={` p-2 ${user.status === 'pending' ? 'text-red-500' : 'text-blue'}`}>{user.status}</td>
                 <td>
                   <button className='mr-2 p-1 rounded-full hover:bg-blue' onClick={() => openEditModal()}>
-                      <AssignmentTurnedInIcon/>
+                    <AssignmentTurnedInIcon />
                   </button>
-
                 </td>
-                  
-
               </tr>
-              
             ))}
           </tbody>
           <Modal
-                      isOpen={isEditModalOpen}
-                      onRequestClose={closeEditModal}
-                      contentLabel="Profile Modal"
-                      className='p-2 bg-white text-center text-white rounded-lg w-96 md:w-1/2 lg:w-1/2 font-raleway '
-                      style={modalStyle}
-                    >
-                     <form action="" className='flex flex-col justify-center items-center w-full'>
-                        
-                        <div className='w-full flex flex-row justify-between items-center p-4'>
-                          <h1 className='text-blue-dark font-bold'>Conplete adoption</h1>
-                          <button className='p-1 text-blue-dark rounded-full hover:bg-red' onClick={closeEditModal}>
-                            <CloseIcon/>
-                          </button>
+            isOpen={isEditModalOpen}
+            onRequestClose={closeEditModal}
+            contentLabel='Profile Modal'
+            className='p-2 bg-white text-center text-white rounded-lg w-96 md:w-1/2 lg:w-1/2 font-raleway '
+            style={modalStyle}
+          >
+            <form action='' className='flex flex-col justify-center items-center w-full'>
+              <div className='w-full flex flex-row justify-between items-center p-4'>
+                <h1 className='text-blue-dark font-bold'>Conplete adoption</h1>
+                <button className='p-1 text-blue-dark rounded-full hover:bg-red' onClick={closeEditModal}>
+                  <CloseIcon />
+                </button>
+              </div>
+              <hr className='border-1 border-purple ' />
 
-                        </div>
-                        <hr  className='border-1 border-purple '/>
-
-                        
-                        <div className='w-full flex flex-row justify-end items-center p-4'>
-                              <button className=' mr-2 p-2 px-4 rounded-md bg-gray hover:bg-red' onClick={closeEditModal} >
-                                <p>Cancel</p>
-                              </button>
-                              <button className='p-2 px-4 rounded-md bg-blue-dark rounded-full hover:bg-blue' onClick={() => {  closeEditModal(); }}>
-                                <p>Yes</p>
-                              </button>
-
-                        </div>
-                        
-                      </form>
-                
-                  </Modal>
+              <div className='w-full flex flex-row justify-end items-center p-4'>
+                <button className=' mr-2 p-2 px-4 rounded-md bg-gray hover:bg-red' onClick={closeEditModal}>
+                  <p>Cancel</p>
+                </button>
+                <button
+                  className='p-2 px-4 rounded-md bg-blue-dark rounded-full hover:bg-blue'
+                  onClick={() => {
+                    closeEditModal();
+                  }}
+                >
+                  <p>Yes</p>
+                </button>
+              </div>
+            </form>
+          </Modal>
         </table>
-
       </div>
-      <div className="sidebar m-4 w-full text-right flex flex-row justify-left items-center">
-
-
-        <div className="pagination w-64 flex flex-row items-center font-raleway rounded-lg text-blue-dark ">
+      <div className='sidebar m-4 w-full text-right flex flex-row justify-left items-center'>
+        <div className='pagination w-64 flex flex-row items-center font-raleway rounded-lg text-blue-dark '>
           <button
-          className="bg-white text-blue-dark hover:bg-blue-dark hover:text-white p-1 border rounded-full "
+            className='bg-white text-blue-dark hover:bg-blue-dark hover:text-white p-1 border rounded-full '
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             <KeyboardArrowLeftIcon />
           </button>
-          <div className="title flex flex-row justify-around p-2  w-16">
+          <div className='title flex flex-row justify-around p-2  w-16'>
             <span>{currentPage}</span> of <span>{totalPages}</span>
-
           </div>
-          
 
           <button
-            className="bg-white text-blue-dark hover:bg-blue-dark hover:text-white p-1 border rounded-full "
+            className='bg-white text-blue-dark hover:bg-blue-dark hover:text-white p-1 border rounded-full '
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-          
-            <KeyboardArrowRightIcon/>
+            <KeyboardArrowRightIcon />
           </button>
         </div>
-        
-
       </div>
-      
-
-      
-
     </div>
   );
 };
