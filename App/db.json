@@ -1,0 +1,152 @@
+{
+  "pet": [
+    {
+      "id": 1,
+      "name": "Money",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet1.jpeg-1705054344767-0.8498247229444151?alt=media&token=2e6a7952-7ca2-477c-86c3-af617cef78cc",
+      "gender": "Female",
+      "breed": "Pitbull",
+      "age": "12",
+      "description": "She is cute and strong.",
+      "medicalStatus": "Healthy"
+    },
+    {
+      "id": 3,
+      "name": "CoCo",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet3.jpeg-1705054962822-0.09393223840651177?alt=media&token=493ce5bb-7b37-4533-8c70-482db59e4fb8",
+      "gender": "Male",
+      "breed": "Shiba",
+      "age": "1",
+      "description": "She is cute and playful.",
+      "medicalStatus": "Healthy"
+    }
+  ],
+  "user": [
+    {
+      "id": 4,
+      "firstName": "Jonas",
+      "lastName": "Hamson",
+      "userName": "jonas123",
+      "email": "jonas123@gmail.com",
+      "password": "jonas123",
+      "phoneNumber": "09682682"
+    },
+    {
+      "id": 2,
+      "firstName": "Veiy",
+      "lastName": "Sokheng",
+      "userName": "veiysokheng",
+      "email": "hengomega678@gmail.com",
+      "password": "12345",
+      "phoneNumber": "0970294797"
+    },
+    {
+      "id": 3,
+      "firstName": "Kairi",
+      "lastName": "Bird",
+      "userName": "kairi",
+      "email": "kairi@gmail.com",
+      "password": "kairi123",
+      "phoneNumber": "0979794797"
+    },
+    {
+      "id": 4,
+      "firstName": "Kyle",
+      "lastName": "Tzy",
+      "userName": "kyleTzy",
+      "email": "kyleTzy@gmail.com",
+      "password": "kyle123",
+      "phoneNumber": "0979794797"
+    },
+    {
+      "id": 5,
+      "firstName": "Ko",
+      "lastName": "Ko",
+      "userName": "koko",
+      "email": "koko@gmial.com",
+      "password": "12345",
+      "phoneNumber": "093973832"
+    },
+    {
+      "id": 6,
+      "firstName": "Sok",
+      "lastName": "Ry",
+      "userName": "sokry",
+      "email": "sokry@gmil.com",
+      "password": "sokry123",
+      "phoneNumber": "0970294797"
+    },
+    {
+      "id": 7,
+      "firstName": "Mako",
+      "lastName": "San",
+      "userName": "makosan",
+      "email": "mako@gmail.com",
+      "password": "1234",
+      "phoneNumber": "093783738"
+    }
+  ],
+  "userRequest": [
+    {
+      "id": 1,
+      "firstName": "Flap",
+      "lastName": "Tzy",
+      "userName": "flaptzy",
+      "email": "flaptzy@gmail.com",
+      "password": "1234",
+      "phoneNumber": "0970294797"
+    }
+  ],
+  "adoptionRequest": [],
+  "adoption": [
+    {
+      "id": 1,
+      "userImage": "https://via.placeholder.com/150",
+      "userUsername": "Mako",
+      "email": "mako@gmail.com",
+      "petImage": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet2.jpeg-1705054435083-0.7201103018896118?alt=media&token=82732abe-67a7-4b78-a691-6e0510b04d8f",
+      "petName": "Poco",
+      "phoneNumber": "093783738",
+      "address": "Psa Kandal, Phnom Penh, Camobodia",
+      "status": "Pending"
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "adminImage": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2F2024-01-12%2019.48.39.jpg?alt=media&token=b5c03a32-1415-4163-9660-b689952f1319",
+      "adminUsername": "Sokheng",
+      "adminEmail": "heng@gmail.com",
+      "adminPassword": "heng1234",
+      "phoneNumber": "0126762847",
+      "address": "Kandal, Cambodia",
+      "role": "Moderator"
+    },
+    {
+      "id": 2,
+      "adminImage": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2F2024-01-12%2019.48.47.jpg?alt=media&token=c322dc47-f723-434c-97d1-d8a6a2903a97",
+      "adminUsername": "Thiry",
+      "adminEmail": "thiry@gmail.com",
+      "adminPassword": "thiry123",
+      "phoneNumber": "0126762847",
+      "address": "Kandal, Cambodia",
+      "role": "Master"
+    }
+  ],
+  "tracking": [
+    {
+      "id": 1,
+      "userImage": "https://via.placeholder.com/150",
+      "username": "Mako",
+      "petImage": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet2.jpeg-1705054435083-0.7201103018896118?alt=media&token=82732abe-67a7-4b78-a691-6e0510b04d8f",
+      "petName": "Poco",
+      "phoneNumber": "093783738",
+      "email": "mako@gmail.com",
+      "week1": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet3.jpeg-1705057585143-0.09924959852384196?alt=media&token=e19c9e87-0ca1-4f5c-b2ae-edf95162c199",
+      "week2": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet3.jpeg-1705057625227-0.8818206459181388?alt=media&token=0601eef4-f068-409f-ae66-aa4926b812db",
+      "week3": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet3.jpeg-1705057647418-0.3021334330537846?alt=media&token=d210f101-ea9a-4004-b759-f0c6ca9e40b1",
+      "week4": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet3.jpeg-1705057702645-0.48402826555834233?alt=media&token=a913c463-d376-4be7-b35b-22a86799c47f"
+    }
+  ],
+  "surrender": []
+}
