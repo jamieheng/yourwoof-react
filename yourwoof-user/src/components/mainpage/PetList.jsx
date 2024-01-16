@@ -224,11 +224,13 @@ export default function PetList() {
         </Typography>
 
         {/* pet card */}
-        <div className='pet-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center m-4 mb-24'>
+        <div className='pet-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center m-4 mb-24'>
         
           {/* Added margin-bottom */}
           {pets.map((pet, index) => (
-            <div key={index} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4'>
+
+            <div key={index} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 justify-center items-center'>
+
               <Card className='w-full h-full md:w-72 lg:w-96 font-raleway mx-auto mb-4 lg:mb-0'>
               
               <CardHeader shadow={false} floated={false} className='relative overflow-hidden'>
