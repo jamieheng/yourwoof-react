@@ -74,7 +74,7 @@ function App() {
           path='/ContactUs'
           element={
             <>
-              {user && <AboutUs />}
+              {user && <ContactUs />}
               {!user && <Navigate to='/Login' />}
             </>
           }
