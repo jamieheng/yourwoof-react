@@ -224,7 +224,7 @@ export default function PetList() {
         </Typography>
 
         {/* pet card */}
-        <div className='pet-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center m-4 mb-24'>
+        <div className='pet-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center m-4 mb-24'>
         
           {/* Added margin-bottom */}
           {pets.map((pet, index) => (
