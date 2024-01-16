@@ -218,18 +218,19 @@ export default function PetList() {
           className=' w-3/4 text-center mx-auto justify-center pb-8 font-raleway'
           style={{ letterSpacing: '1.5px' }}
         >
+          
           "Open your heart to a lifetime of love and joy – adopt, don't shop! Give a furry friend a forever home and make a
           difference in their world and yours. 🐾 #AdoptDontShop #SaveALife"
         </Typography>
 
         {/* pet card */}
-        <div className='pet-container grid grid-cols-1 lg:grid-cols-4 justify-center items-center lg:items-stretch lg:place-items-center m-4 mb-24'>
-          {' '}
+        <div className='pet-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center m-4 mb-24'>
+        
           {/* Added margin-bottom */}
           {pets.map((pet, index) => (
-            // card ele
-            <Card key={index} className='w-full h-full md:w-72 lg:w-96 font-raleway'>
-              {' '}
+            <div key={index} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4'>
+              <Card className='w-full h-full md:w-72 lg:w-96 font-raleway mx-auto mb-4 lg:mb-0'>
+              
               <CardHeader shadow={false} floated={false} className='relative overflow-hidden'>
                 <img alt='pet image' src={pet.image} className='h-80 w-full object-cover object-center max-w-full' />
               </CardHeader>
@@ -278,6 +279,9 @@ export default function PetList() {
                 </Button>
               </CardFooter>
             </Card>
+
+            </div>
+
           ))}
         </div>
         <Modal
