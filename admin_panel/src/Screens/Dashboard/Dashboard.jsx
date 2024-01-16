@@ -180,9 +180,9 @@ const Dashboard = () => {
                 </div>
 
                 <div className='card-box flex flex-col w-full h-64  '>
-                  <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
+                  {/* <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
                     <Bar data={data} options={options} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -215,11 +215,11 @@ const Dashboard = () => {
         </div>
 
         <div className='content min-h-screen rounded-lg w-full mx-1 '>
-          <div className='header-box-wrapper bg-white justify-center items-center rounded-lg drop-shadow-lg '>
+          {/* <div className='header-box-wrapper bg-white justify-center items-center rounded-lg drop-shadow-lg '>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar />
             </LocalizationProvider>
-          </div>
+          </div> */}
 
           <h1 className='font-raleway-bold text-xl color-blue-dark pt-4'>Adoption Overview</h1>
 
@@ -238,11 +238,11 @@ const Dashboard = () => {
             </div>
             <div className='card-box flex flex-col w-full h-64  '>
               <div className='card-box bg-white w-full h-full p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark items-center'>
-                <div className='h-48'>
+                {/* <div className='h-48'>
                   {' '}
-                  {/* Adjust the height of the chart container */}
+                  
                   <Pie data={datapie} options={{ maintainAspectRatio: false }} />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
