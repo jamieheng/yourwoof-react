@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { Bar } from 'react-chartjs-2';
-import { Pie } from 'react-chartjs-2';
-import { Line } from 'react-chartjs-2';
+// import { Bar } from 'react-chartjs-2';
+// import { Pie } from 'react-chartjs-2';
+// import { Line } from 'react-chartjs-2';
 
 import { NavLink } from 'react-router-dom';
 
@@ -205,9 +205,9 @@ const Dashboard = () => {
                 </div>
 
                 <div className='card-box flex flex-col w-full h-64  '>
-                  <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
+                  {/* <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
                     <Line data={dataline} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
