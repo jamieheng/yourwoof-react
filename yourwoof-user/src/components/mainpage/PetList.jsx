@@ -203,20 +203,20 @@ export default function PetList() {
   return (
     <div className='flex flex-col w-screen h-screen font-raleway'>
       {/* pet list */}
-      <div className='pet-container mt-24 flex flex-col flex-1 flex-shrink-0'>
+      <div className='pet-container mt-40 flex flex-col flex-1 flex-shrink-0'>
         {/* <div className="flex flex-col"> */}
         {/* header img */}
         <div className='relative m-4'>
           <img className='h-full w-full object-cover object-center' src='../images/adoptmedog.jpg' alt='About us dog' />
           <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center p-4'>
-            <h1 className='text-6xl font-bold'>RESCUE ANIMALS IN NEEDS</h1>
+            <h1 className='md:text-2xl lg:text-6xl font-bold'>RESCUE ANIMALS IN NEEDS</h1>
           </div>
         </div>
-        <p className='p-6 mt-4 text-3xl font-bold text-center'>ADOPT A FRIEND</p>
+        <p className='p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center'>ADOPT A FRIEND</p>
         <Typography
           variant='lead'
-          className=' w-3/4 text-center mx-auto justify-center pb-8 font-raleway'
-          style={{ letterSpacing: '1.5px' }}
+          className=' w-3/4 text-start mx-auto justify-center pb-8 font-raleway'
+         
         >
           
           "Open your heart to a lifetime of love and joy – adopt, don't shop! Give a furry friend a forever home and make a

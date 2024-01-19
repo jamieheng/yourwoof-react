@@ -69,7 +69,7 @@ export function NavigateBar() {
 
   const navList = (
     <ul className='flex flex-col lg:flex-row justify-start lg:justify-between items-start lg:items-center'>
-      <div className='flex flex-row items-center justify-center md:hidden lg:hidden'>
+      <div className='flex p-4 flex-row items-center justify-center lg:hidden'>
         {user && (
           <p className='text-darkpurple mr-3 font-raleway'>
             <span className='font-bold'>Welcome,</span> {user.firstName} {user.lastName}
@@ -241,7 +241,7 @@ export function NavigateBar() {
 
         {/* mobile login */}
       </div>
-      <div className='p-4 md:hidden lg:hidden'>
+      <div className='p-4  lg:hidden'>
         {user && (
           <Button
             className='hover:text-darkpurple '

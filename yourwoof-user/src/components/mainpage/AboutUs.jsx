@@ -10,7 +10,7 @@ import {
 import Footer from "./Footer";
 export default function AboutUs() {
 	return (
-		<div className="relative mt-20 font-raleway">
+		<div className="relative mt-40 font-raleway">
 			<div className="relative">
 				<div className="absolute h-full w-full bg-black opacity-30"></div>
 				<img
@@ -19,7 +19,7 @@ export default function AboutUs() {
 					alt="About us dog"
 				/>
 				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center p-4">
-					<h1 className="text-6xl font-bold">ABOUT YOURWOOF</h1>
+					<h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">ABOUT YOURWOOF</h1>
 					<p className="text-xl font-raleway">Learn more about our story and mission.</p>
 				</div>
 			</div>
@@ -27,7 +27,7 @@ export default function AboutUs() {
 			<Typography
 				variant="lead"
 				className=" w-3/4 text-center mx-auto justify-center pb-8 font-raleway"
-				style={{ letterSpacing: "1.5px" }}
+		
 			>
 				At the core of our mission lies a passionate commitment to enhancing the
 				lives of stray animals in Cambodia. Stray animals face unique

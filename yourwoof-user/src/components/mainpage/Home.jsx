@@ -28,6 +28,20 @@ export default function Home() {
       });
   }, []);
 
+  const [pets, setPets] = useState([]);
+  useEffect(() => {
+    axios
+      .get('https://yourwoof-server.onrender.com/pet')
+      .then((response) => {
+        setPets(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  const countVaccinated = pets.filter((pet) => pet.medicalStatus === 'Vaccinated').length;
+  const countUnderAge = pets.filter((pet) => pet.age < 12).length;
+
   const handleSurrenderSubmit = () => {
     addSurrender();
   };
@@ -59,9 +73,9 @@ export default function Home() {
   const modalStyle = {
     content: {
       position: 'absolute',
-      top: '55%', // Center vertically
-      left: '50%', // Center horizontally
-      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+      top: '55%', 
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
       overflowY: 'auto',
       margin: 'auto',
     },
@@ -74,9 +88,9 @@ export default function Home() {
   const mssModalStyle = {
     content: {
       position: 'absolute',
-      top: '50%', // Center vertically
-      left: '50%', // Center horizontally
-      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+      top: '50%',
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
       overflowY: 'auto',
       margin: 'auto',
     },
@@ -180,15 +194,15 @@ export default function Home() {
 
       {/* Carousel */}
 
-      <Carousel className='rounded-xl h-32 lg:h-96' autoplay autoplayDelay={3000} infinite>
+      <Carousel className='rounded-xl h-32 md:h-64 lg:h-96' autoplay autoplayDelay={3000} infinite>
         <img src='../images/sliderpic8.jpg' alt='image 1' className='w-full h-auto max-h-full object-cover' />
         <img src='../images/sliderpic9.jpg' alt='image 2' className='w-full h-auto max-h-full object-cover' />
         <img src='../images/sliderpic7.jpg' alt='image 3' className='w-full h-auto max-h-full object-cover' />
       </Carousel>
 
-      {/* <p className="p-6 mt-4 text-3xl font-bold text-center">
+      <p className="p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center">
 				RESCUE DOG NEEDED
-			</p> */}
+			</p>
 
       <div className='w-full md:h-80 lg:h-80 flex flex-col md:flex-row lg:flex-row justify-center items-center bg-grey p-4'>
         <img src={require('./../assets/images/model.jpg')} alt='logo' className='w-full md:w-1/2 lg:w-1/2 h-64 object-cover' />
@@ -203,36 +217,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div className="flex items-center justify-center text-center mx-auto my-auto w-40 h-40 sm:w-48 sm:h-48">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="Line">
-					<path
-						style={{
-							textIndent: 0,
-							textAlign: "start",
-							lineHeight: "normal",
-							textTransform: "none",
-							blockProgression: "tb",
-							marker: "none",
-							fontFamily: "Sans",
-							fontWeight: 400,
-							overflow: "visible",
-							transform: "translate(0 -988.362)",
-						}}
-						d="M27.219 1012.29c-.63 0-1.19.276-1.657.688-.466.413-.859.957-1.218 1.594-.72 1.274-1.317 2.917-1.969 4.531-.652 1.615-1.348 3.227-2.188 4.375-.84 1.148-1.77 1.813-2.968 1.813H2.78a.5.5 0 1 0 0 1H17.22c1.587 0 2.808-.964 3.75-2.25.941-1.287 1.653-2.931 2.312-4.563.66-1.631 1.282-3.245 1.938-4.406.327-.58.663-1.046 1-1.344.337-.298.644-.437 1-.437.774 0 1.399.5 2.031 1.375.632.874 1.204 2.098 1.75 3.344.546 1.245 1.086 2.505 1.719 3.5.632.994 1.424 1.78 2.5 1.78.949 0 1.69-.386 2.187-.937.497-.55.769-1.21 1.032-1.843.262-.635.505-1.237.78-1.625.276-.39.521-.594 1-.594.192 0 .306.066.47.219.163.153.363.404.53.75.336.69.638 1.695 1.032 2.718s.878 2.076 1.656 2.907c.779.83 1.868 1.406 3.313 1.406h14a.5.5 0 1 0 0-1h-14c-1.192 0-1.967-.425-2.594-1.094-.627-.67-1.093-1.585-1.469-2.562-.376-.978-.668-2.003-1.062-2.813-.197-.405-.416-.747-.719-1.031-.303-.285-.706-.5-1.156-.5-.804 0-1.424.451-1.813 1-.388.548-.62 1.197-.875 1.812-.255.616-.526 1.207-.875 1.594-.348.387-.742.594-1.437.594-.569 0-1.097-.432-1.657-1.313-.56-.88-1.106-2.12-1.656-3.375-.55-1.254-1.12-2.53-1.843-3.531-.724-1-1.647-1.781-2.844-1.781z"
-						color="#000"
-						enable-background="accumulate"
-						font-family="Sans"
-						font-weight="400"
-						overflow="visible"
-						transform="translate(0 -988.362)"
-						fill="#e1affd"
-						class="color000000 svgShape"
-					></path>
-				</svg>
-			</div> */}
+      
 
       {/*  Pet list */}
-      <p className='p-6 mt-4 text-3xl font-bold text-center'>ADOPT OR FOSTER A RESCUED ANIMAL</p>
+      <p className='p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center'>ADOPT OR FOSTER A RESCUED ANIMAL</p>
 
       <div className='w-full flex flex-col items-center justify-center mb-4 lg:h-96'>
         <img
@@ -256,6 +244,8 @@ export default function Home() {
           </Link>
         </Button>
       </div>
+
+      <p className='p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center'>SURRENDER A PET</p>
 
       <div className='surrender-pet relative h-96 w-full'>
         <img src={require('./../assets/images/beach.jpg')} alt='logo' className='w-full h-full object-cover object-center' />
@@ -467,7 +457,7 @@ export default function Home() {
       </Modal>
 
       {/* Total categorized */}
-      <p className='p-6 mt-4 text-3xl font-bold text-center'>TOTAL PETS IN CATEGORIES</p>
+      <p className='p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center'>TOTAL PETS IN CATEGORIES</p>
 
       <div className='flex flex-col lg:flex-row justify-center items-center'>
         <Card
@@ -488,7 +478,7 @@ export default function Home() {
               VACCINATED
             </Typography>
             <Typography variant='h1' className='mb-4 text-white font-raleway'>
-              10
+              {countVaccinated}
             </Typography>
           </CardBody>
         </Card>
@@ -510,7 +500,7 @@ export default function Home() {
               UNDER 1 YEAR OLD
             </Typography>
             <Typography variant='h1' className='mb-4 text-white font-raleway'>
-              7
+              {countUnderAge}
             </Typography>
           </CardBody>
         </Card>

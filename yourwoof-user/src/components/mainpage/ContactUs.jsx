@@ -22,7 +22,7 @@ export default function ContactUs() {
 				<Typography
 					variant="h6"
 					color="blue-gray"
-					className="text-center w-1/2 font-raleway"
+					className="text-center w-full md:w-1/2 lg:w-1/2 font-raleway"
 				>
 					To contact us about our services or to adopt one of our rescues,
 					please don’t hesitate to contact us on any of the details below or
@@ -31,7 +31,7 @@ export default function ContactUs() {
 				</Typography>
 			</div>
 
-			<div className="p-2 content-container mx-auto flex flex-col items-center bg-light-purple text-raleway rounded-lg">
+			<div className="p-4 content-container mx-auto flex flex-col items-center bg-light-purple text-raleway rounded-lg">
 				<Card
 					color="transparent"
 					shadow={false}

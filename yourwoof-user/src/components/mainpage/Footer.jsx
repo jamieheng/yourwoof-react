@@ -10,7 +10,7 @@ import {
 export default function Footer() {
 	return (
 		<div className="w-full p-4">
-			<p className="p-6 mt-4 text-3xl font-bold text-center">
+			<p className="p-6 mt-4 md:text-2xl lg:text-3xl font-bold text-center">
 				CONTACT INFORMATION
 			</p>
 			<div className="footer-container w-full flex flex-col items-center justify-between mt-10">
