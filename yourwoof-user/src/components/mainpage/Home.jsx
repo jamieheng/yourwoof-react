@@ -174,7 +174,7 @@ export default function Home() {
     <div className='flex flex-col items-center justify-center w-screen p-4 mt-36 font-raleway'>
       <div className='flex flex-row justify-center items-center w-full m-8 lg:m-16'>
         <h1 className='text-xl md:text-4xl lg:text-4xl font-bold text-center'>
-          Hi to, <span className='text-lavender font-bold'>Yourwoof</span>{' '}
+        Welcome to, <span className='text-lavender font-bold'>Yourwoof</span>{' '}
         </h1>
       </div>
 
