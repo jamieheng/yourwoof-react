@@ -9,9 +9,8 @@ import { useSelector } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-// import { Bar } from 'react-chartjs-2';
-// import { Pie } from 'react-chartjs-2';
-// import { Line } from 'react-chartjs-2';
+
+
 
 import { NavLink } from 'react-router-dom';
 
@@ -144,7 +143,12 @@ const Dashboard = () => {
     ],
   };
 
+  
+
+
   const { admin } = useSelector((state) => state.admin);
+
+  
 
   return (
     <div className='pl-10 md:pl-16 lg:pl-16 min-h-screen w-screen bg-white flex flex-col overflow-hidden '>
@@ -180,9 +184,9 @@ const Dashboard = () => {
                 </div>
 
                 <div className='card-box flex flex-col w-full h-64  '>
-                  {/* <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
-                    <Bar data={data} options={options} />
-                  </div> */}
+                  <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
+                    {/* <Bar data={data} options={options} /> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -205,9 +209,9 @@ const Dashboard = () => {
                 </div>
 
                 <div className='card-box flex flex-col w-full h-64  '>
-                  {/* <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
-                    <Line data={dataline} />
-                  </div> */}
+                  <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
+                   
+                  </div>
                 </div>
               </div>
             </div>
@@ -215,11 +219,11 @@ const Dashboard = () => {
         </div>
 
         <div className='content min-h-screen rounded-lg w-full mx-1 '>
-          {/* <div className='header-box-wrapper bg-white justify-center items-center rounded-lg drop-shadow-lg '>
+          <div className='header-box-wrapper bg-white justify-center items-center rounded-lg drop-shadow-lg '>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar />
             </LocalizationProvider>
-          </div> */}
+          </div>
 
           <h1 className='font-raleway-bold text-xl color-blue-dark pt-4'>Adoption Overview</h1>
 
@@ -238,11 +242,11 @@ const Dashboard = () => {
             </div>
             <div className='card-box flex flex-col w-full h-64  '>
               <div className='card-box bg-white w-full h-full p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark items-center'>
-                {/* <div className='h-48'>
-                  {' '}
+                <div className='h-48'>
+                 
                   
-                  <Pie data={datapie} options={{ maintainAspectRatio: false }} />
-                </div> */}
+                 
+                </div>
               </div>
             </div>
           </div>
