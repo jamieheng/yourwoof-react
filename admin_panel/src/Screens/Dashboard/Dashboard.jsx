@@ -145,7 +145,7 @@ const Dashboard = () => {
                     series={[
                       {
                         data: [
-                          { id: 0, value: countMalePets, label: 'Male', color: '#3944BC'},
+                          { id: 0, value: countMalePets, label: 'Male', color: '#3944BC', fontFamily: 'Ral'},
                           { id: 1, value: countFemalePets, label: 'Female', color: '#FC8EAC' },
                         ],
                       },
