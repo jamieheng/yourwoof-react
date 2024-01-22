@@ -11,6 +11,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 
+import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
+
 
 import { NavLink } from 'react-router-dom';
 
@@ -98,53 +101,6 @@ const Dashboard = () => {
 
   const adoptionRequestCount = adoptionRequest.length;
 
-  // Chart data
-  const data = {
-    labels: ['Male', 'Female'],
-    datasets: [
-      {
-        label: 'Pet Genders',
-        data: [countMalePets, countFemalePets],
-        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
-
-  const datapie = {
-    labels: ['Adoption', 'Adoption Request'],
-    datasets: [
-      {
-        data: [adoptCount, adoptionRequestCount], // Data values for each category
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Background color for each category
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Hover background color
-      },
-    ],
-  };
-
-  const dataline = {
-    labels: ['User', 'Recently requested'],
-    datasets: [
-      {
-        label: 'User Data',
-        data: [userCount, userRequestCount],
-        fill: false,
-        borderColor: 'rgba(75, 192, 192, 1)', // Line color
-      },
-    ],
-  };
-
-  
-
 
   const { admin } = useSelector((state) => state.admin);
 
@@ -184,9 +140,21 @@ const Dashboard = () => {
                 </div>
 
                 <div className='card-box flex flex-col w-full h-64  '>
-                  <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
-                    {/* <Bar data={data} options={options} /> */}
-                  </div>
+                <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark justify-center'>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: countMalePets, label: 'Male', color: '#3944BC'},
+                          { id: 1, value: countFemalePets, label: 'Female', color: '#FC8EAC' },
+                        ],
+                      },
+                    ]}
+                   
+                    className={`font-raleway mx-auto`} 
+                  />
+                </div>
+
                 </div>
               </div>
             </div>
@@ -210,6 +178,18 @@ const Dashboard = () => {
 
                 <div className='card-box flex flex-col w-full h-64  '>
                   <div className='card-box bg-white w-full h-64 p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark'>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: userCount, label: 'User' },
+                          { id: 1, value: userRequestCount, label: 'Request' },
+                        ],
+                      },
+                    ]}
+                   
+                    className={`font-raleway mx-auto`} 
+                  />
                    
                   </div>
                 </div>
@@ -242,11 +222,20 @@ const Dashboard = () => {
             </div>
             <div className='card-box flex flex-col w-full h-64  '>
               <div className='card-box bg-white w-full h-full p-2 mb-1 rounded-lg drop-shadow-lg font-raleway text-center text-blue-dark items-center'>
-                <div className='h-48'>
-                 
-                  
-                 
-                </div>
+               
+                <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: adoptCount, label: 'Adopted', color: 'primary'},
+                          { id: 1, value: adoptionRequestCount, label: 'Request'  },
+                        ],
+                      },
+                    ]}
+                   
+                    className={`font-raleway mx-auto`} 
+                />
+                   
               </div>
             </div>
           </div>
