@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { storage } from '../../config/firebase';
-
+import BarLoader from "react-spinners/BarLoader";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -23,8 +23,9 @@ const PetTable = () => {
   };
 
   const [message, setMessage] = useState('');
-
   const [isPending, setIsPending] = useState(false);
+
+  
 
   const onHandleChange = async (e) => {
     const file = e.target.files[0];
@@ -600,6 +601,8 @@ const PetTable = () => {
 
                 <div className='text-blue-dark p-2 w-full text-start'>
                   <p className='mb-2 font-bold'>Pet Image</p>
+                 
+                 
                   <input
                     type='file'
                     onChange={(e) => {
@@ -608,7 +611,9 @@ const PetTable = () => {
                     name='pathImage'
                     className={`w-full p-4 items-center border-sm outline-none border border-blue-dark rounded-lg focus:bg-blue-dark focus:text-white hover:bg-blue-dark hover:text-white`}
                   />
-                  {/* {isInvalidPetImg && <p className='text-red text-left mt-2'>Please upload a pet image *</p>} */}
+
+                   {isPending && <div className='m-2 text-center'><BarLoader color="#232b38" /></div>  } 
+                  
                 </div>
 
                 <div className='text-blue-dark p-2 w-full text-start'>
