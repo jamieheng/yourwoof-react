@@ -46,7 +46,7 @@ const WelcomePage = () => {
   };
 
   return (
-    <div className='bg-container flex flex-col justify-start lg:flex-row lg:justify-center h-screen w-screen'>
+    <div className='bg-container flex flex-col justify-start lg:flex-row lg:justify-center h-screen w-screen font-raleway'>
       <div
         className='welcome-image bg-blue-dark w-full lg:w-1/2 h-64 lg:h-full'
         style={{
@@ -184,7 +184,7 @@ const WelcomePage = () => {
 
         <div className='login-choice flex flex-col justify-center items-center w-full lg:w-1/2'>
           <p>Already have an account?</p>
-          <Link to='/Login' className='flex items-center text-lavender hover:text-darkpurple'>
+          <Link to='/Login' className='flex items-center text-lavender hover:text-darkpurple font-bold'>
             Login here
           </Link>
         </div>

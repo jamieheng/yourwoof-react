@@ -136,9 +136,7 @@ function Login() {
           </Card>
         </div>
 
-        <div className='w-full'>
-          <p className=' text-black hover:text-darkpurple font-raleway text-center underline underline-offset-1'>Skip</p>
-        </div>
+        
       </div>
     </div>
   );

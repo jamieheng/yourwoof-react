@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@material-tailwind/react';
-
+import BarLoader from "react-spinners/BarLoader";
 import Footer from './Footer';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ export default function Tracking() {
       });
   }, []);
 
+
   const [adoptions, setAdoptions] = useState([]);
   useEffect(() => {
     axios
@@ -35,10 +36,11 @@ export default function Tracking() {
       });
   }, []);
 
+
   const [isVerified, setIsVerified] = useState(false);
 
   const isUserEmailExisted = (email) => {
-    return adoptions.some((adoption) => adoption.email.toLowerCase() === email.toLowerCase());
+    return tracking.some((tracking) => tracking.email.toLowerCase() === email.toLowerCase());
   };
 
   const checkIfUserEmailExists = () => {
@@ -54,36 +56,44 @@ export default function Tracking() {
       }
     } else {
       setIsVerified(false);
-      // Handle the case when the user is not logged in
+      
     }
   };
 
   useEffect(() => {
     checkIfUserEmailExists();
-  }, [adoptions, user]);
+  }, [tracking, user]);
+
+  
+
+  const [isPending1, setIsPending1] = useState(false);
+  const [isPending2, setIsPending2] = useState(false);
+  const [isPending3, setIsPending3] = useState(false);
+  const [isPending4, setIsPending4] = useState(false);
 
   const updateWeek2Tracking = () => {
-    const userAdoption = adoptions.find((adoption) => adoption.email.toLowerCase() === user.email.toLowerCase());
+   
+    const userTracking = tracking.find((tracking) => tracking.email.toLowerCase() === user.email.toLowerCase());
 
-    if (userAdoption) {
+    if (userTracking) {
       const updatedWeek2Tracking = {
         userImage: 'https://via.placeholder.com/150',
         username: user.firstName,
         email: user.email,
-        petImage: userAdoption.petImage,
-        petName: userAdoption.petName,
+        petImage: userTracking.petImage,
+        petName: userTracking.petName,
         phoneNumber: user.phoneNumber,
-        week1: week1Image,
+        week1: userTracking.week1,
         week2: week2Image,
         week3: '',
         week4: '',
       };
 
       axios
-        .put(`https://yourwoof-server.onrender.com/tracking/${userAdoption.email}`, updatedWeek2Tracking)
+        .put(`https://yourwoof-server.onrender.com/tracking/${userTracking.email}`, updatedWeek2Tracking)
         .then((response) => {
           setTracking((prevTracking) => {
-            const updatedTracking = prevTracking.map((item) => (item.email === userAdoption.email ? response.data : item));
+            const updatedTracking = prevTracking.map((item) => (item.email === userTracking.email ? response.data : item));
             return updatedTracking;
           });
           console.log('Week 2 tracking updated successfully');
@@ -111,11 +121,11 @@ export default function Tracking() {
     try {
       const date = new Date();
       const imagePath = storage.ref(`/images/${file.name}-${date.getTime().toString()}-${Math.random()}`);
-
+      setIsPending2(true); 
       await imagePath.put(file);
       const getUrl = await imagePath.getDownloadURL();
       setWeek2Image(getUrl);
-
+      setIsPending2(false)
       console.log(getUrl);
     } catch (err) {
       console.log(err);
@@ -124,33 +134,33 @@ export default function Tracking() {
   };
 
   const updateWeek3Tracking = () => {
-    const userAdoption = adoptions.find((adoption) => adoption.email.toLowerCase() === user.email.toLowerCase());
+    const userTracking = tracking.find((tracking) => tracking.email.toLowerCase() === user.email.toLowerCase());
 
-    if (userAdoption) {
+    if (userTracking) {
       const updatedWeek2Tracking = {
         userImage: 'https://via.placeholder.com/150',
         username: user.firstName,
         email: user.email,
-        petImage: userAdoption.petImage,
-        petName: userAdoption.petName,
+        petImage: userTracking.petImage,
+        petName: userTracking.petName,
         phoneNumber: user.phoneNumber,
-        week1: week1Image,
-        week2: week2Image,
+        week1: userTracking.week1,
+        week2: userTracking.week2,
         week3: week3Image,
         week4: '',
       };
 
       axios
-        .put(`https://yourwoof-server.onrender.com/tracking/${userAdoption.email}`, updatedWeek2Tracking)
+        .put(`https://yourwoof-server.onrender.com/tracking/${userTracking.email}`, updatedWeek2Tracking)
         .then((response) => {
           setTracking((prevTracking) => {
-            const updatedTracking = prevTracking.map((item) => (item.email === userAdoption.email ? response.data : item));
+            const updatedTracking = prevTracking.map((item) => (item.email === userTracking.email ? response.data : item));
             return updatedTracking;
           });
           console.log('Week 2 tracking updated successfully');
         })
         .catch((error) => {
-          console.log(userAdoption.email);
+          console.log(userTracking.email);
           console.error(error);
         });
     } else {
@@ -172,11 +182,11 @@ export default function Tracking() {
     try {
       const date = new Date();
       const imagePath = storage.ref(`/images/${file.name}-${date.getTime().toString()}-${Math.random()}`);
-
+      setIsPending3(true); 
       await imagePath.put(file);
       const getUrl = await imagePath.getDownloadURL();
       setWeek3Image(getUrl);
-
+      setIsPending3(false); 
       console.log(getUrl);
     } catch (err) {
       console.log(err);
@@ -185,33 +195,33 @@ export default function Tracking() {
   };
 
   const updateWeek4Tracking = () => {
-    const userAdoption = adoptions.find((adoption) => adoption.email.toLowerCase() === user.email.toLowerCase());
+    const userTracking = tracking.find((tracking) => tracking.email.toLowerCase() === user.email.toLowerCase());
 
-    if (userAdoption) {
+    if (userTracking) {
       const updatedWeek2Tracking = {
         userImage: 'https://via.placeholder.com/150',
         username: user.firstName,
         email: user.email,
-        petImage: userAdoption.petImage,
-        petName: userAdoption.petName,
+        petImage: userTracking.petImage,
+        petName: userTracking.petName,
         phoneNumber: user.phoneNumber,
-        week1: week1Image,
-        week2: week2Image,
-        week3: week3Image,
+        week1: userTracking.week1,
+        week2: userTracking.week2,
+        week3: userTracking.week3,
         week4: week4Image,
       };
 
       axios
-        .put(`https://yourwoof-server.onrender.com/tracking/${userAdoption.email}`, updatedWeek2Tracking)
+        .put(`https://yourwoof-server.onrender.com/tracking/${userTracking.email}`, updatedWeek2Tracking)
         .then((response) => {
           setTracking((prevTracking) => {
-            const updatedTracking = prevTracking.map((item) => (item.email === userAdoption.email ? response.data : item));
+            const updatedTracking = prevTracking.map((item) => (item.email === userTracking.email ? response.data : item));
             return updatedTracking;
           });
           console.log('Week 2 tracking updated successfully');
         })
         .catch((error) => {
-          console.log(userAdoption.email);
+          console.log(userTracking.email);
           console.error(error);
         });
     } else {
@@ -233,11 +243,11 @@ export default function Tracking() {
     try {
       const date = new Date();
       const imagePath = storage.ref(`/images/${file.name}-${date.getTime().toString()}-${Math.random()}`);
-
+      setIsPending4(true); 
       await imagePath.put(file);
       const getUrl = await imagePath.getDownloadURL();
       setWeek4Image(getUrl);
-
+      setIsPending4(false); 
       console.log(getUrl);
     } catch (err) {
       console.log(err);
@@ -245,22 +255,24 @@ export default function Tracking() {
     console.log(file);
   };
 
+
+
   const onSubmitWeek1 = (e) => {
     e.preventDefault();
     addTracking();
-    setWeek1Clicked(true);
+   
   };
   const addTracking = () => {
-    // Find the user's adoption data
-    const userAdoption = adoptions.find((adoption) => adoption.email.toLowerCase() === user.email.toLowerCase());
+    
+    const userTracking = tracking.find((tracking) => tracking.email.toLowerCase() === user.email.toLowerCase());
 
-    if (userAdoption) {
-      const newTracking = {
+    if (userTracking) {
+      const updatedWeek1Tracking = {
         userImage: 'https://via.placeholder.com/150',
         username: user.firstName,
         email: user.email,
-        petImage: userAdoption.petImage,
-        petName: userAdoption.petName,
+        petImage: userTracking.petImage,
+        petName: userTracking.petName,
         phoneNumber: user.phoneNumber,
         week1: week1Image,
         week2: '',
@@ -268,18 +280,27 @@ export default function Tracking() {
         week4: '',
       };
 
+      
       axios
-        .post('https://yourwoof-server.onrender.com/tracking', newTracking)
+        .put(`https://yourwoof-server.onrender.com/tracking/${userTracking.email}`, updatedWeek1Tracking)
         .then((response) => {
-          setTracking((prevTracking) => [...prevTracking, response.data]);
+          setTracking((prevTracking) => {
+            const updatedTracking = prevTracking.map((item) => (item.email === userTracking.email ? response.data : item));
+            return updatedTracking;
+          });
+
+          console.log('Week 1 tracking updated successfully');
         })
         .catch((error) => {
+          console.log(userTracking.email);
           console.error(error);
         });
     } else {
       console.error('User adoption data not found.');
     }
   };
+
+
 
   const [week1Image, setWeek1Image] = useState('');
   const onHandleWeek1 = async (e) => {
@@ -288,22 +309,38 @@ export default function Tracking() {
     try {
       const date = new Date();
       const imagePath = storage.ref(`/images/${file.name}-${date.getTime().toString()}-${Math.random()}`);
-
+      setIsPending1(true);
       await imagePath.put(file);
       const getUrl = await imagePath.getDownloadURL();
       setWeek1Image(getUrl);
 
+      setIsPending1(false);
       console.log(getUrl);
     } catch (err) {
       console.log(err);
     }
     console.log(file);
+    
   };
 
+  
   const [week1Clicked, setWeek1Clicked] = useState(false);
   const [week2Clicked, setWeek2Clicked] = useState(false);
   const [week3Clicked, setWeek3Clicked] = useState(false);
   const [week4Clicked, setWeek4Clicked] = useState(false);
+
+  
+
+  const globalUserTracking = tracking.find((tracking) => tracking.email.toLowerCase() === user.email.toLowerCase());
+  
+
+  // useEffect(() => {
+   
+  
+  // }, [globalUserTracking]);
+
+
+  
 
   return (
     <div className='font-raleway'>
@@ -332,11 +369,17 @@ export default function Tracking() {
       </Typography>
 
       <div className='form-wrapper flex flex-col lg:flex-row justify-center items-center p-4'>
-        <form action='' className='w-96 font-raleway p-4'>
-          {week1Clicked ? (
+
+        <form action='' className='w-96 font-raleway p-4 flex flex-col justify-center items-center'>
+        {globalUserTracking && globalUserTracking.week1 && (
+          <>
+            <img src={globalUserTracking.week1 ?? ""} alt="" className='w-64 h-64'/>
             <div className=' text-blue-dark p-2 w-full text-center text-bold'> Week 1 Image Uploaded</div>
-          ) : (
-            <div className={`text-blue-dark p-2 w-full text-center}`}>
+          </>
+            
+          )}
+          {globalUserTracking && !globalUserTracking.week1 && (
+            <div className='text-blue-dark p-2 w-full text-center'>
               <p className='mb-2 font-bold'>Week 1</p>
 
               <div className='w-full flex flex-row justify-center items-center'>
@@ -352,37 +395,54 @@ export default function Tracking() {
                   <CloudUploadIcon />
                 </button>
               </div>
+              {isPending1 && <div className='m-2 text-center'><BarLoader color="#232b38" /></div>  } 
             </div>
           )}
         </form>
 
-        <form action='' className='w-96 font-raleway p-4'>
-          {week2Clicked ? (
+        <form action='' className='w-96 font-raleway p-4 flex flex-col justify-center items-center'>
+
+        {globalUserTracking && globalUserTracking.week2 && (
+           <>
+            <img src={globalUserTracking.week2 ?? ""} alt="" className='w-64 h-64' />
             <div className=' text-blue-dark p-2 w-full text-center text-bold'> Week 2 Image Uploaded</div>
-          ) : (
+          </>)}
+           
+          {globalUserTracking && globalUserTracking.week1 && !globalUserTracking?.week2 && (
             <div className='text-blue-dark p-2 w-full text-center'>
-              <p className='mb-2 font-bold'>Week 2</p>
-              <div className='w-full flex flex-row justify-center items-center'>
-                <input
-                  type='file'
-                  onChange={(e) => onHandleWeek2(e)}
-                  className='w-full p-2 items-center border-sm outline-none border border-lavender rounded-lg focus:bg-lavender focus:text-white hover:bg-blue-dark hover:text-white'
-                />
-                <button
-                  onClick={onSubmitWeek2}
-                  className='w-16 border border-lavender hover:bg-lavender p-2 rounded-lg hover:text-grey ml-2'
-                >
-                  <CloudUploadIcon />
-                </button>
-              </div>
+            <p className='mb-2 font-bold'>Week 2</p>
+            <div className='w-full flex flex-row justify-center items-center'>
+              <input
+                type='file'
+                onChange={(e) => onHandleWeek2(e)}
+                className='w-full p-2 items-center border-sm outline-none border border-lavender rounded-lg focus:bg-lavender focus:text-white hover:bg-blue-dark hover:text-white'
+              />
+              <button
+                onClick={onSubmitWeek2}
+                className='w-16 border border-lavender hover:bg-lavender p-2 rounded-lg hover:text-grey ml-2'
+              >
+                <CloudUploadIcon />
+              </button>
+              
             </div>
+            {isPending2 && <div className='m-2 text-center'><BarLoader color="#232b38" /></div>  } 
+          </div>
           )}
+
+        
+            
+          
         </form>
 
-        <form action='' className='w-96 font-raleway p-4'>
-          {week3Clicked ? (
+        <form action='' className='w-96 font-raleway p-4 flex flex-col justify-center items-center'>
+          {globalUserTracking && globalUserTracking.week3 && (
+            <>
+            <img src={globalUserTracking.week3 ?? ""} alt="" className='w-64 h-64'/>
             <div className=' text-blue-dark p-2 w-full text-center text-bold'> Week 3 Image Uploaded</div>
-          ) : (
+          </>
+          ) }
+
+          {globalUserTracking && globalUserTracking.week1 && globalUserTracking.week2 && !globalUserTracking?.week3 && (
             <div className='text-blue-dark p-2 w-full text-center'>
               <p className='mb-2 font-bold'>Week 3</p>
               <div className='w-full flex flex-row justify-center items-center'>
@@ -397,15 +457,21 @@ export default function Tracking() {
                 >
                   <CloudUploadIcon />
                 </button>
+                
               </div>
+              {isPending3 && <div className='m-2 text-center'><BarLoader color="#232b38" /></div>  } 
             </div>
           )}
         </form>
 
-        <form action='' className='w-96 font-raleway p-4'>
-          {week4Clicked ? (
+        <form action='' className='w-96 font-raleway p-4 flex flex-col justify-center items-center'>
+        {globalUserTracking && globalUserTracking.week4 && (
+            <>
+            <img src={globalUserTracking.week4 ?? ""} alt="" className='w-64 h-64'/>
             <div className=' text-blue-dark p-2 w-full text-center text-bold'> Week 4 Image Uploaded</div>
-          ) : (
+          </>
+          ) }
+          {globalUserTracking && globalUserTracking.week1 && globalUserTracking.week2 && globalUserTracking.week3 && !globalUserTracking.week4 && (
             <div className='text-blue-dark p-2 w-full text-center'>
               <p className='mb-2 font-bold'>Week 4</p>
               <div className='w-full flex flex-row justify-center items-center'>
@@ -420,10 +486,13 @@ export default function Tracking() {
                 >
                   <CloudUploadIcon />
                 </button>
+                
               </div>
+              {isPending4 && <div className='m-2 text-center'><BarLoader color="#232b38" /></div>  } 
             </div>
           )}
         </form>
+
       </div>
 
       <div className='relative m-4 w-full h-full'>

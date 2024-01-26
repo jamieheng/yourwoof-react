@@ -109,7 +109,7 @@ export default function PetList() {
     // Check if terms are accepted before submitting
     if (termsChecked) {
       closeModal();
-      openMssModal();
+      // openMssModal();
       adoptRequest(selectedPet);
     }
     // Handle form submission logic
@@ -146,7 +146,7 @@ export default function PetList() {
       userUsername: user.firstName,
       email: user.email,
       petImage: selectedPet.image,
-      petId: selectedPet.id, // Assuming you have an 'id' property for each pet
+      petId: selectedPet.id, 
       petName: selectedPet.name,
       phoneNumber: user.phoneNumber,
       address: useraddress,
@@ -166,9 +166,9 @@ export default function PetList() {
   const modalStyle = {
     content: {
       position: 'absolute',
-      top: '55%', // Center vertically
-      left: '50%', // Center horizontally
-      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+      top: '55%', 
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
       overflowY: 'auto',
       margin: 'auto',
     },
@@ -195,8 +195,7 @@ export default function PetList() {
 
   const [selectedPet, setSelectedPet] = useState(null);
 
-  const [fullname, setFullname] = useState('');
-  const [useremail, setEmail] = useState('');
+ 
   const [useraddress, setAddress] = useState('');
   const [userphonenumber, setPhonenumber] = useState('');
 
@@ -286,6 +285,7 @@ export default function PetList() {
 
           ))}
         </div>
+
         <Modal
           isOpen={isVerModalOpen}
           onRequestClose={closeVerModal}
@@ -294,7 +294,7 @@ export default function PetList() {
           style={mssModalStyle}
         >
           <p className='text-xl'>Your Account is not verified.</p>
-          <p className='text-xl mt-2'>It will be verified in 24 hours.</p>
+          <p className='text-xl mt-2'>Please wait petiently.</p>
 
           <div className='mt-2 w-16 h-16 rounded-full border-2 border-lavender bg-transparent grid place-items-center'>
             <SentimentVeryDissatisfiedIcon className='text-9xl text-lavender' />
@@ -327,36 +327,7 @@ export default function PetList() {
               <Card color='transparent' shadow={false} className='mt-4 mb-8 items-center font-raleway w-full sm:w-96'>
                 <form className='mt-8 mb-2 w-full max-w-screen-lg sm:w-96 font-raleway'>
                   <div className='mb-1 flex flex-col gap-6'>
-                    <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
-                      Fullname
-                    </Typography>
-                    <Input
-                      value={fullname}
-                      onChange={(e) => setFullname(e.target.value)}
-                      required
-                      type='text'
-                      size='lg'
-                      placeholder=''
-                      className=' !border-darkpurple focus:!border-lavender bg-white font-raleway'
-                      labelProps={{
-                        className: 'before:content-none after:content-none',
-                      }}
-                    />
-
-                    <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
-                      Email
-                    </Typography>
-                    <Input
-                      value={useremail}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      size='lg'
-                      placeholder=''
-                      className=' !border-darkpurple focus:!border-lavender bg-white font-raleway'
-                      labelProps={{
-                        className: 'before:content-none after:content-none',
-                      }}
-                    />
+                    
 
                     <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
                       Address
@@ -372,21 +343,7 @@ export default function PetList() {
                         className: 'before:content-none after:content-none',
                       }}
                     />
-                    <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
-                      Phone number
-                    </Typography>
-                    <Input
-                      value={userphonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)}
-                      required
-                      type='text'
-                      size='lg'
-                      placeholder=''
-                      className=' !border-darkpurple focus:!border-lavender bg-white font-raleway'
-                      labelProps={{
-                        className: 'before:content-none after:content-none',
-                      }}
-                    />
+                    
                   </div>
                 </form>
 
@@ -413,9 +370,12 @@ export default function PetList() {
                   </label>
                 </div>
 
+
                 <Button
                   onClick={() => {
                     handleSubmit();
+                    openMssModal();
+                    closeModal();
                   }}
                   className={`bg-lavender mt-4 ${
                     !termsChecked ? 'bg-red' : ''
@@ -424,7 +384,13 @@ export default function PetList() {
                 >
                   Submit
                 </Button>
-                <Modal
+
+              </Card>
+            </div>
+          </form>
+        </Modal>
+
+        <Modal
                   isOpen={isMssModalOpen}
                   onRequestClose={closeMssModal}
                   contentLabel='Profile Modal'
@@ -438,10 +404,6 @@ export default function PetList() {
                     <CheckIcon className='text-9xl text-lavender' />
                   </div>
                   <p className='text-3xl mt-2'>Thank you.</p>
-                </Modal>
-              </Card>
-            </div>
-          </form>
         </Modal>
       </div>
 

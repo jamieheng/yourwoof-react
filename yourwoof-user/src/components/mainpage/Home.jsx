@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel, Textarea } from '@material-tailwind/react';
 import CheckIcon from '@mui/icons-material/Check';
+import BarLoader from "react-spinners/BarLoader";
 
 import { Card, CardHeader, CardBody, Typography, Button, Input } from '@material-tailwind/react';
 
@@ -148,8 +149,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
+  
   const [petname, setPetName] = useState('');
   const [petgender, setPetGender] = useState('');
   const [petage, setPetAge] = useState('');
@@ -275,6 +275,9 @@ export default function Home() {
         className='w-96 md:w-1/2 lg:w-1/2 p-2 h-3/4 bg-white text-center text-white rounded-lg font-raleway'
         style={modalStyle}
       >
+
+        
+        {/* SURRENDER FORM */}
         <Card color='transparent' shadow={false} className=' items-center mt-4 font-raleway'>
           <Typography variant='h4' color='blue-gray' className='font-raleway'>
             Form for surrender you pet
@@ -282,38 +285,7 @@ export default function Home() {
 
           <form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 '>
             <div className='mb-1 flex flex-col gap-6'>
-              <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
-                Fullname
-              </Typography>
-              <Input
-                required
-                value={fullname}
-                onChange={(e) => setFullname(e.target.value)}
-                type='text'
-                size='lg'
-                placeholder='Veiy Sokheng'
-                className=' !border-darkpurple focus:!border-lavender font-raleway'
-                labelProps={{
-                  className: 'before:content-none after:content-none',
-                }}
-              />
-
-              <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
-                Email
-              </Typography>
-              <Input
-                required
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                size='lg'
-                placeholder='name@mail.com'
-                className=' !border-darkpurple focus:!border-lavender font-raleway'
-                labelProps={{
-                  className: 'before:content-none after:content-none',
-                }}
-              />
-
+              
               <Typography variant='h6' color='blue-gray' className='-mb-3 font-raleway'>
                 Pet name
               </Typography>
@@ -422,6 +394,7 @@ export default function Home() {
                   className: 'before:content-none after:content-none',
                 }}
               />
+              {isPending && <div className=' text-center'><BarLoader color="#745bb1" /></div>  } 
             </div>
 
             <Button

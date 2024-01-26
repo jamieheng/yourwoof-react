@@ -26,12 +26,14 @@ export function NavigateBar() {
     dispatch(logOut());
   };
 
-  const [adoptions, setAdoptions] = useState([]);
+  
+
+  const [tracking, setTracking] = useState([]);
   useEffect(() => {
     axios
-      .get('https://yourwoof-server.onrender.com/adoption')
+      .get('https://yourwoof-server.onrender.com/tracking')
       .then((response) => {
-        setAdoptions(response.data);
+        setTracking(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -39,7 +41,7 @@ export function NavigateBar() {
   }, []);
 
   const isUserEmailExisted = (email) => {
-    return adoptions.some((adoption) => adoption.email.toLowerCase() === email.toLowerCase());
+    return tracking.some((tracking) => tracking.email.toLowerCase() === email.toLowerCase());
   };
 
   const [isVerified, setIsVerified] = useState(false);
@@ -65,7 +67,7 @@ export function NavigateBar() {
 
   useEffect(() => {
     checkIfUserEmailExists();
-  }, [adoptions, user]);
+  }, [tracking, user]);
 
   const navList = (
     <ul className='flex flex-col lg:flex-row justify-start lg:justify-between items-start lg:items-center'>
