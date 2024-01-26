@@ -108,8 +108,8 @@ export default function PetList() {
   const handleSubmit = (e) => {
     // Check if terms are accepted before submitting
     if (termsChecked) {
+      openMssModal();
       closeModal();
-      // openMssModal();
       adoptRequest(selectedPet);
     }
     // Handle form submission logic
@@ -374,8 +374,7 @@ export default function PetList() {
                 <Button
                   onClick={() => {
                     handleSubmit();
-                    openMssModal();
-                    closeModal();
+                    
                   }}
                   className={`bg-lavender mt-4 ${
                     !termsChecked ? 'bg-red' : ''
