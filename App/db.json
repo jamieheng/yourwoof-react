@@ -89,19 +89,7 @@
     }
   ],
   "adoptionRequest": [],
-  "adoption": [
-    {
-      "id": 1,
-      "userImage": "https://via.placeholder.com/150",
-      "userUsername": "Mako",
-      "email": "mako@gmail.com",
-      "petImage": "https://firebasestorage.googleapis.com/v0/b/fir-yourwoof.appspot.com/o/images%2Fpet2.jpeg-1705054435083-0.7201103018896118?alt=media&token=82732abe-67a7-4b78-a691-6e0510b04d8f",
-      "petName": "Poco",
-      "phoneNumber": "093783738",
-      "address": "Psa Kandal, Phnom Penh, Camobodia",
-      "status": "Pending"
-    }
-  ],
+  "adoption": [],
   "admin": [
     {
       "id": 1,
@@ -124,8 +112,6 @@
       "role": "Master"
     }
   ],
-  "tracking": [
-   
-  ],
+  "tracking": [],
   "surrender": []
 }

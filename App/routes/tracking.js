@@ -59,7 +59,7 @@ trackingRouter.put("/:email", (req, res) => {
       phoneNumber,
       address,
       email,
-      week1,
+      week1, 
       week2,
       week3,
       week4,
