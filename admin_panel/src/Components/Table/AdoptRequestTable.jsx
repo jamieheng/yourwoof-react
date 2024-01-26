@@ -71,57 +71,73 @@ const AdoptRequestTable = () => {
 
   const [selectedAdoption, setSelectedAdoption] = useState(null);
   const [adoptionRequest, setAdoptionRequest] = useState([]);
-  useEffect(() => {
+
+useEffect(() => {
+  axios
+    .get('https://yourwoof-server.onrender.com/adoptionRequest')
+    .then((response) => {
+      setAdoptionRequest(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
+// Function to set new user data
+const setNewAdoptionData = (adoption) => {
+  setSelectedAdoption(adoption);
+};
+
+const addAdoptionRequest = (id) => {
+  if (selectedAdoption) {
+    const { petId, ...newAdoptionWithoutId } = selectedAdoption;
+    const selectedTracking = {
+      ...newAdoptionWithoutId,
+      week1: '',
+      week2: '',
+      week3: '',
+      week4: '',
+    };
+
     axios
-      .get('https://yourwoof-server.onrender.com/adoptionRequest')
+      .post('https://yourwoof-server.onrender.com/adoption', newAdoptionWithoutId)
       .then((response) => {
-        setAdoptionRequest(response.data);
+        axios
+          .post('https://yourwoof-server.onrender.com/tracking', selectedTracking)
+          .then(() => {
+            axios
+              .delete(`https://yourwoof-server.onrender.com/pet/${petId}`)
+              .then(() => {
+                const updatedPets = pets.filter((pet) => pet.id !== petId);
+                setPets(updatedPets);
+              })
+              .catch((error) => {
+                console.error('Error deleting pet:', error);
+              });
+
+            console.log('User added successfully:', response.data);
+            deleteAdoptionRequest(id);
+          })
+          .catch((error) => {
+            console.error('Error adding tracking data:', error);
+          });
+      })
+      .then(() => {
+        axios
+          .get('https://yourwoof-server.onrender.com/adoptionRequest')
+          .then((response) => {
+            setAdoptionRequest(response.data);
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error);
+          });
       })
       .catch((error) => {
-        console.error(error);
+        console.error('Error adding user:', error);
       });
-  }, []);
+  }
+};
 
-  // Function to set new user data
-  const setNewAdoptionData = (adoption) => {
-    setSelectedAdoption(adoption);
-  };
-
-  const addAdoptionRequest = (id) => {
-    if (selectedAdoption) {
-      const { petId, ...newAdoptionWithoutId } = selectedAdoption;
-
-      axios
-        .post('https://yourwoof-server.onrender.com/adoption', newAdoptionWithoutId)
-        .then((response) => {
-          // Delete the pet using petId
-          axios
-            .delete(`https://yourwoof-server.onrender.com/pet/${petId}`)
-            .then(() => {
-              const updatedPets = pets.filter((pet) => pet.id !== petId);
-              setPets(updatedPets);
-            })
-            .catch((error) => {
-              console.error('Error deleting pet:', error);
-            });
-
-          console.log('User added successfully:', response.data);
-          deleteAdoptionRequest(id);
-
-          axios
-            .get('https://yourwoof-server.onrender.com/adoptionRequest')
-            .then((response) => {
-              setAdoptionRequest(response.data);
-            })
-            .catch((error) => {
-              console.error('Error fetching user data:', error);
-            });
-        })
-        .catch((error) => {
-          console.error('Error adding user:', error);
-        });
-    }
-  };
 
   const deleteAdoptionRequest = (id) => {
     axios

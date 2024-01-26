@@ -124,7 +124,7 @@ const TableForm = () => {
           >
             <form action='' className='flex flex-col justify-center items-center w-full'>
               <div className='w-full flex flex-row justify-between items-center p-4'>
-                <h1 className='text-blue-dark font-bold'>Conplete adoption</h1>
+                <h1 className='text-blue-dark font-bold'>Complete adoption</h1>
                 <button className='p-1 text-blue-dark rounded-full hover:bg-red' onClick={closeEditModal}>
                   <CloseIcon />
                 </button>

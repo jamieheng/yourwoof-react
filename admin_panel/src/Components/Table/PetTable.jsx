@@ -84,7 +84,7 @@ const PetTable = () => {
       setPetGender(selectedPet.gender);
       setPetAge(selectedPet.age);
       setPetBreed(selectedPet.breed);
-      setPathImage(pathImage);
+      setPathImage(selectedPet.image);
       setPetDesc(selectedPet.description);
       setPetMedi(selectedPet.medicalStatus);
       // Set other state values as needed
@@ -313,7 +313,7 @@ const PetTable = () => {
                     <button
                       className='p-1 rounded-full hover:bg-red'
                       onClick={() => {
-                        openDeleteModal(pets.id);
+                        openDeleteModal(pets.id); //1
                       }}
                     >
                       <DeleteIcon />

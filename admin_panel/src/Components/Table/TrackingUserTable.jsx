@@ -5,10 +5,15 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import CloseIcon from '@mui/icons-material/Close';
 
 import SearchBar from '../SearchBar/SearchBar';
 
 import axios from 'axios';
+
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 const TrackingtrackingTable = () => {
   const handleSearch = (searchTerm) => {
@@ -27,6 +32,46 @@ const TrackingtrackingTable = () => {
         console.error(error);
       });
   }, []);
+
+  const modalStyle = {
+    content: {
+      position: 'absolute',
+      top: '50%', // Center vertically
+      left: '50%', // Center horizontally
+      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(1px)',
+    },
+  };
+
+  // delete modal
+  const [deleteModalTrackingId, setDeleteModalTrackingId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const openDeleteModal = (id) => {
+    setIsDeleteModalOpen(true);
+    setDeleteModalTrackingId(id); // Save the current id in state
+  };
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const deleteTracking = (id) => {
+    axios
+      .delete(`https://yourwoof-server.onrender.com/tracking/${id}`)
+      .then((response) => {
+        const updatedTrackings = tracking.filter((tracking) => tracking.id !== id);
+        setTracking(updatedTrackings);
+      })
+      .catch((error) => {
+        console.error('Error deleting pet:', error.message);
+      });
+  };
+
+  
+  
+
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -86,7 +131,7 @@ const TrackingtrackingTable = () => {
                 </td>
                 <td className='p-2'>{tracking.email}</td>
                 <td className='p-2'>{tracking.phoneNumber}</td>
-                <td className='p-2'>
+                <td className='p-2 '>
                   <img src={tracking.week1} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
                 </td>
                 <td className='p-2'>
@@ -101,9 +146,49 @@ const TrackingtrackingTable = () => {
 
                 <td className='p-2 text-center'>
                   <div className='flex flex-row justify-center items-center'>
-                    <button className=' mr-2 p-1 rounded-full hover:bg-blue'>
+                    <button className=' mr-2 p-1 rounded-full hover:bg-blue'
+                   
+                      onClick={() => {
+                      openDeleteModal(tracking.id);
+                    }}
+                    >
                       <VerifiedIcon />
                     </button>
+
+                    {/* delete modal */}
+                    <Modal
+                      isOpen={isDeleteModalOpen}
+                      onRequestClose={closeDeleteModal}
+                      contentLabel='Profile Modal'
+                      className='w-96 md:w-1/2 lg:w-1/2 p-2 bg-white text-center text-white rounded-lg font-raleway '
+                      style={modalStyle}
+                    >
+                      <form action='' className='flex flex-col justify-center items-center w-full'>
+                        <div className='w-full flex flex-row justify-between items-center p-4'>
+                          <h1 className='text-blue-dark font-bold'>Do you want to confirm this tracking?</h1>
+                          <button className='p-1 text-blue-dark rounded-full hover:bg-red' onClick={closeDeleteModal}>
+                            <CloseIcon />
+                          </button>
+                        </div>
+                        <hr className='border-1 border-purple ' />
+
+                        <div className='w-full flex flex-row justify-end items-center p-4'>
+                          <button className=' mr-2 p-2 px-4 rounded-md bg-gray hover:bg-red' onClick={closeDeleteModal}>
+                            <p>Cancel</p>
+                          </button>
+                          <button
+                            className='p-2 px-4 rounded-md bg-blue-dark rounded-full hover:bg-blue'
+                            onClick={() => {
+                              deleteTracking(deleteModalTrackingId);
+                              closeDeleteModal();
+                            }}
+                          >
+                            <p>Yes</p>
+                          </button>
+                        </div>
+                      </form>
+                    </Modal>
+
                     <button className='p-1 rounded-full hover:bg-red'>
                       <ReportProblemIcon />
                     </button>

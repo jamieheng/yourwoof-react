@@ -23,9 +23,9 @@ const SurrenderTable = () => {
   const modalStyle = {
     content: {
       position: 'absolute',
-      top: '50%', // Center vertically
-      left: '50%', // Center horizontally
-      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+      top: '50%', 
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -33,20 +33,9 @@ const SurrenderTable = () => {
     },
   };
 
-  const [surrenderRequest, setSurrenderRequest] = useState([]);
-  useEffect(() => {
-    axios
-      .get('https://yourwoof-server.onrender.com/surrender')
-      .then((response) => {
-        setSurrenderRequest(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  
 
   // Function to set new user data
-
   const [pets, setPets] = useState([]);
   useEffect(() => {
     axios
@@ -59,26 +48,7 @@ const SurrenderTable = () => {
       });
   }, []);
 
-  const addSurrender = () => {
-    const newPet = {
-      name: surrenderRequest[0].petName,
-      image: surrenderRequest[0].petImage,
-      gender: surrenderRequest[0].petGender,
-      breed: surrenderRequest[0].petBreed,
-      age: surrenderRequest[0].petAge,
-      description: surrenderRequest[0].petDesc,
-      medicalStatus: surrenderRequest[0].petMedi,
-    };
-
-    axios
-      .post('https://yourwoof-server.onrender.com/pet', newPet)
-      .then((response) => {
-        setPets((prevPets) => [...prevPets, response.data]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  
 
   const deleteSurrender = (id) => {
     axios
@@ -92,21 +62,7 @@ const SurrenderTable = () => {
         console.error('Error deleting pet:', error.message);
       });
   };
-
-  // add modal
-  const [addModalSurrenderId, setAddModalSurrenderId] = useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const openAddModal = (id) => {
-    setIsAddModalOpen(true);
-    setAddModalSurrenderId(id);
-  };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
-  };
-
   // delete Modal
-
   const [deleteModalSurrenderId, setDeleteModalSurrenderId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const openDeleteModal = (id) => {
@@ -114,11 +70,71 @@ const SurrenderTable = () => {
     setDeleteModalSurrenderId(id);
     console.log(id);
   };
-
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
 
+
+
+  // add modal
+  const [surrenderRequest, setSurrenderRequest] = useState([]);
+  useEffect(() => {
+    axios
+      .get('https://yourwoof-server.onrender.com/surrender')
+      .then((response) => {
+        setSurrenderRequest(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const [addModalSurrenderId, setAddModalSurrenderId] = useState(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const openAddModal = (id) => {
+    setIsAddModalOpen(true);
+    setAddModalSurrenderId(id);
+    console.log(addModalSurrenderId);
+  };
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+
+  const addSurrender = () => {
+  if (addModalSurrenderId !== null) {
+    const surrenderRequestById = surrenderRequest.find((surrender) => surrender.id === addModalSurrenderId);
+
+    if (surrenderRequestById) {
+      const newPet = {
+        name: surrenderRequestById.petName,
+        image: surrenderRequestById.petImage,
+        gender: surrenderRequestById.petGender,
+        breed: surrenderRequestById.petBreed,
+        age: surrenderRequestById.petAge,
+        description: surrenderRequestById.petDesc,
+        medicalStatus: surrenderRequestById.petMedi,
+      };
+
+      axios
+        .post(`https://yourwoof-server.onrender.com/pet`, newPet)
+        .then((response) => {
+          setPets((prevPets) => [...prevPets, response.data]);
+          
+          setSurrenderRequest((prevSurrenderRequest) =>
+            prevSurrenderRequest.filter((surrender) => surrender.id !== addModalSurrenderId)
+          );
+          closeAddModal();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }
+};
+
+
+  
+  
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
