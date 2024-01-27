@@ -139,7 +139,7 @@ export default function Tracking() {
     if (userTracking) {
       const updatedWeek2Tracking = {
         userImage: 'https://via.placeholder.com/150',
-        username: user.firstName,
+        userUsername: user.firstName,
         email: user.email,
         petImage: userTracking.petImage,
         petName: userTracking.petName,
