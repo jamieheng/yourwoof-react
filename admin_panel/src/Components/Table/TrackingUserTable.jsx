@@ -120,7 +120,7 @@ const TrackingtrackingTable = () => {
                 <td className='p-2'>
                   <div className='pf flex flex-row items-center'>
                     <img src={tracking.userImage} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
-                    <p>{tracking.username}</p>
+                    <p>{tracking.userUsername}</p>
                   </div>
                 </td>
                 <td className='p-2'>
