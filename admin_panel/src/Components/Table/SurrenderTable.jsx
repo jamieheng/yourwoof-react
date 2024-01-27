@@ -179,7 +179,7 @@ const SurrenderTable = () => {
                 <td className='p-2'>
                   <div className='pf flex flex-row items-center'>
                     <img src={surrender.userImage} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
-                    <p>{surrender.userUsername}</p>
+                    <p>{surrender.username}</p>
                   </div>
                 </td>
                 <td className='p-2'>
