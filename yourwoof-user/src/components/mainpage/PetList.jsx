@@ -55,9 +55,9 @@ export default function PetList() {
   const mssModalStyle = {
     content: {
       position: 'absolute',
-      top: '50%', // Center vertically
-      left: '50%', // Center horizontally
-      transform: 'translate(-50%, -50%)', // Center both vertically and horizontally
+      top: '50%',
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
       overflowY: 'auto',
       margin: 'auto',
     },
@@ -104,6 +104,77 @@ export default function PetList() {
     // Clear the timeout when the component is unmounted or when isMssModalOpen changes
     return () => clearTimeout(timeoutId);
   }, [isVerModalOpen]);
+
+  
+  const [tracking, setTracking] = useState([]);
+  useEffect(() => {
+    axios
+      .get('https://yourwoof-server.onrender.com/tracking')
+      .then((response) => {
+        setTracking(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const isMatchEmail = (email) => {
+    return tracking.some((tracking) => tracking.email.toLowerCase() === email.toLowerCase());
+  };
+
+  const [isChecked, setIsChecked] = useState(false);
+  // Now you can use this function to check if the user's email already exists
+  const checkMatchEmailExists = () => {
+    const userEmail = user.email; // Change this to get the actual user email
+    const isExisted =  isMatchEmail(userEmail);
+
+    if (isExisted) {
+      console.log('User email already exists.');
+      setIsChecked(true);
+    } else {
+      console.log('User email does not exist.');
+      setIsChecked(false);
+    }
+  };
+
+  useEffect(() => {
+    // Call the function to check if user email exists when the component mounts
+    checkMatchEmailExists();
+  }, [tracking, user.email]);
+
+  const checkModalStyle = {
+    content: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%', 
+      transform: 'translate(-50%, -50%)', 
+      overflowY: 'auto',
+      margin: 'auto',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(1px)',
+    },
+  };
+
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const openCheckModal = () => {
+    setIsCheckModalOpen(true);
+  };
+
+  const closeCheckModal = () => {
+    setIsCheckModalOpen(false);
+  };
+
+  useEffect(() => {
+    // Use setTimeout to close the modal after 5 seconds
+    const timeoutId = setTimeout(() => {
+      closeCheckModal();
+    }, 5000);
+
+    // Clear the timeout when the component is unmounted or when isMssModalOpen changes
+    return () => clearTimeout(timeoutId);
+  }, [isCheckModalOpen]);
 
   const handleSubmit = (e) => {
     // Check if terms are accepted before submitting
@@ -197,7 +268,7 @@ export default function PetList() {
 
  
   const [useraddress, setAddress] = useState('');
-  const [userphonenumber, setPhonenumber] = useState('');
+ 
 
   return (
     <div className='flex flex-col w-screen h-screen font-raleway'>
@@ -266,9 +337,14 @@ export default function PetList() {
                 <Button
                   onClick={() => {
                     if (isVerified === true) {
-                      openModal();
-                      setSelectedPet(pet);
-                    } else {
+                      if(isChecked === true) {
+                        openCheckModal();
+                      } else {
+                        openModal();
+                        setSelectedPet(pet);
+                      }
+                      
+                    }  else {
                       openVerModal();
                     }
                   }}
@@ -295,6 +371,21 @@ export default function PetList() {
         >
           <p className='text-xl'>Your Account is not verified.</p>
           <p className='text-xl mt-2'>Please wait petiently.</p>
+
+          <div className='mt-2 w-16 h-16 rounded-full border-2 border-lavender bg-transparent grid place-items-center'>
+            <SentimentVeryDissatisfiedIcon className='text-9xl text-lavender' />
+          </div>
+          <p className='text-3xl mt-2'>Thank you.</p>
+        </Modal>
+        <Modal
+          isOpen={isCheckModalOpen}
+          onRequestClose={closeCheckModal}
+          contentLabel='Profile Modal'
+          className='w-96 md:w-1/2 lg:w-1/2 p-2 h-1/2 bg-white text-center text-black rounded-lg font-raleway flex flex-col justify-center items-center'
+          style={checkModalStyle}
+        >
+          <p className='text-xl'>You can only only adopt a pet in a time.</p>
+          <p className='text-xl mt-2'>Please finish your current adoption.</p>
 
           <div className='mt-2 w-16 h-16 rounded-full border-2 border-lavender bg-transparent grid place-items-center'>
             <SentimentVeryDissatisfiedIcon className='text-9xl text-lavender' />
@@ -349,11 +440,14 @@ export default function PetList() {
 
                 <div className='w-full border border-lavender rounded-lg items-start text-bluedark p-2'>
                   <p className='text-lavender font-bold'>Adoption Policy:</p>
-                  <p className='text-left'>1. You must send us a photo of the adopted pet every week for a month.</p>
-                  <p className='text-left'>2. You must treat your pets with love and care.</p>
-                  <p className='text-left'>
+                  <p className='text-left mt-2'>1. You must send us a photo of the adopted pet every week for a month.</p>
+                  <p className='text-left mt-2'>2. You must treat your pets with love and care.</p>
+                  <p className='text-left mt-2'>
                     3. If we find that you have abused the pet under any circumstances, we reserve the right to take legal action
                     against you.
+                  </p>
+                  <p className='text-left mt-2'>
+                    4. You can only adopt a pet in a time.
                   </p>
                 </div>
 
