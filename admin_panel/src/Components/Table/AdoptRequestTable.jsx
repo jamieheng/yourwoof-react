@@ -197,7 +197,7 @@ const addAdoptionRequest = (id) => {
                 <td className='p-2'>
                   <div className='pf flex flex-row items-center'>
                     <img src={user.userImage} alt='Profile' className='w-6 h-6 rounded-full mr-2' />
-                    <p>{user.userUsername}</p>
+                    <p>{user.username}</p>
                   </div>
                 </td>
 
