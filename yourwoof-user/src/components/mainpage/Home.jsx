@@ -50,7 +50,7 @@ export default function Home() {
   const addSurrender = () => {
     const newRequest = {
       userImage: 'https://via.placeholder.com/150',
-      userUsername: user.firstName,
+      username: user.firstName,
       email: user.email,
       petImage: pathImage,
       petName: petname,
