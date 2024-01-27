@@ -81,7 +81,7 @@ const TableForm = () => {
               <td className='p-2'>Email</td>
               <td className='p-2'>Phone number</td>
               <td className='p-2'>Address</td>
-              <td className='p-2'>Status</td>
+              {/* <td className='p-2'>Status</td> */}
               <td className='p-2 text-center'>Action</td>
             </tr>
           </thead>
@@ -106,7 +106,7 @@ const TableForm = () => {
 
                 <td className='p-2'>{user.phoneNumber}</td>
                 <td className='p-2'>{user.address}</td>
-                <td className={` p-2 ${user.status === 'pending' ? 'text-red-500' : 'text-blue'}`}>{user.status}</td>
+                {/* <td className={` p-2 ${user.status === 'pending' ? 'text-red-500' : 'text-blue'}`}>{user.status}</td> */}
                 <td>
                   <button className='mr-2 p-1 rounded-full hover:bg-blue' onClick={() => openEditModal()}>
                     <AssignmentTurnedInIcon />
